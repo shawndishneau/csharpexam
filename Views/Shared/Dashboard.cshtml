@@ -1,0 +1,44 @@
+@using Exam2.Models;
+@model List<Idea>
+
+        <!-- I used ViewBag because I took info from one controller to the next-->
+        <h1 style="width:950px;inline-block;text-align:center;margin-bottom:50px;">Hi, @ViewBag.firstName @ViewBag.lastName!</h1>
+        <h1 style="width:950px;inline-block;text-align:center;margin-bottom:50px;">The Idea Center</h1>
+        <div>
+            <a asp-action="PlanIdea" asp-controller="Idea"><button style="background-color:blue;color:white;display:inline-block;">Add New Idea!</button></a>
+            <a href="/ProcessLoggingOut"><button style="background-color:blue;color:white;display:inline-block;">LogOut</button></a>
+        </div>
+        
+        
+
+
+
+        @foreach (Idea fun in Model)
+        {
+
+                <p style="display:inline-block;"><a href="/ViewIdea/@fun.IdeaId">@fun.Creator.FirstName</a>  says:</p>
+                <p style="border:2px solid black;display:inline-block;width:200px;padding-left:10px;">@fun.IdeaDescription</p>                
+                <p style="width:100px;padding-left:25px;padding-right:5px;margin-left:100px;"><a href="/ViewIdea/@fun.IdeaId">@fun.PeopleLikingIdeas.Count people</a> like this</p>
+
+                <p style="width:200px;padding-left:20px;">
+                    
+                    @if (@ViewBag.LoggedUserId == @fun.CreatorId)
+                    {
+                        
+                        @if((DateTime.Now - @fun.CreatedAt).TotalDays < 1)
+                        {
+                            <a href="/Delete/@fun.IdeaId">Delete</a>
+                            @* <a href="EditIdea/@fun.IdeaId">Edit</a> *@
+                        }
+                    } 
+                    @if(fun.PeopleLikingIdeas.Any(a => a.UserId == @ViewBag.LoggedUserId))
+                    {
+                        <a href="/ProcessUnLikeIdea/@fun.IdeaId" style="padding-left:30px;">Un-Like</a>
+                    } 
+                    else
+                    {
+                        <a href="/ProcessLikeIdea/@fun.IdeaId" style="padding-left:43px;">Like</a>
+                    }
+                </p>
+        }
+        </table>

@@ -1,0 +1,44 @@
+@using Exam2.Models;
+@model Idea
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body style="margin:auto;width:970px;height:970px;">
+    <div>
+        <a href="/Dashboard" style="display:inline-block;width:120px;"><button style="background-color: blue; color:white;">Dashboard</button></a>
+        <a href="/ProcessLoggingOut"><button style="background-color:blue;color:white;display:inline-block;">LogOut</button></a>
+    </div>
+    <div>
+        <p style="display:inline-block;">@Model.Creator.Alias says:</p>
+        <p style="border: 2px solid black; width:100px;display:inline-block;">@Model.IdeaDescription</p>
+    </div>
+
+
+    
+    
+    <h2>Idea Liked List</h2>
+
+        <h3>Likers: @Model.PeopleLikingIdeas.Count</h3>
+
+    
+        <h3>People Who Like This Post</h3>
+            @foreach (Association idea in Model.PeopleLikingIdeas)
+            {   
+                <div style="display:inline-block;">
+                    <p>Alias</p>
+                    <li style="list-style-type:none;"><a href="/PersonsIdea/@idea.IdeaId">@idea.AGuest.Alias</a></li>
+                </div>
+                <div style="display:inline-block;">
+                    <p>Name</p>
+                    <li style="list-style-type:none;">@idea.AGuest.FirstName @idea.AGuest.LastName</li>
+                </div>
+            }
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+@using Exam2.Models;
+@model Idea
+
+<a href="/Dashboard" style="display:inline-block;width:120px;"><button style="background-color: blue; color:white;">Dashboard</button></a>
+<a href="/ProcessLoggingOut"><button style="background-color:blue;color:white;display:inline-block;">LogOut</button></a>
+    <h3>Date Posted</h3>
+    <h3>Name: @Model.Creator.FirstName @Model.Creator.LastName</h3>
+    <h3>Alias: @Model.Creator.Alias</h3>
+    <h3>Email: @Model.Creator.Email</h3>
+    <h3>Total Number of Posts: @Model.Creator.IdeasCreated.Count</h3>
+    <h3>Total Number of Likes: @Model.PeopleLikingIdeas.Count</h3>

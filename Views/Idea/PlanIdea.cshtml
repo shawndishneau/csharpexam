@@ -1,0 +1,13 @@
+@using Exam2.Models;
+@model Idea
+
+
+    <h1 style="width:560px;display:inline-block;text-align:center;margin-bottom:55px;">Plan Your Activity</h1>
+    <a href="/Dashboard" style="display:inline-block;width:120px;"><button style="background-color: blue; color:white;">Dashboard</button></a>
+    <a href="/ProcessLoggingOut"><button style="background-color:blue;color:white;display:inline-block;">LogOut</button></a>
+    <form asp-action="ProcessPlanIdea" asp-controller="Idea" method="POST">        
+        <span asp-validation-for="IdeaDescription"></span><br>
+        <p>Description:</p> 
+        <textarea asp-for="IdeaDescription"></textarea><br>
+        <input type="submit" style="margin-top:20px;background-color:blue;color:white">
+    </form>
